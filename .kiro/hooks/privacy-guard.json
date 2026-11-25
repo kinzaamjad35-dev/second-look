@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Privacy guard on client code",
+      "description": "Stops full-resolution images or the API key leaking into network calls from the app, and checks that saved OCR text is redacted.",
+      "trigger": "PostFileSave",
+      "matcher": "(app|src)/.*\\.(ts|tsx)$",
+      "action": {
+        "type": "agent",
+        "prompt": "Check the file you just saved against #product privacy principles: (1) full-resolution images, original photo-library URIs, or unscaled data URLs are never sent in any fetch/XHR — only a downscaled JPEG (long edge ≤ 1024, quality ~0.6) may go to /api/classify, and only when Smart sorting is on; (2) GEMINI_API_KEY is never referenced in client/app code and never placed in EXPO_PUBLIC_*; (3) any text saved to SQLite or sent to /api/ask passes through redact() first; (4) no console.log of OCR text or image payloads; (5) photo-library deletes must go through an explicit confirmation. If anything violates this, fix it and explain the fix in one line."
+      }
+    }
+  ]
+}

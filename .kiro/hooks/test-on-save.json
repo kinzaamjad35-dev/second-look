@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Run related tests on save",
+      "description": "When the agent edits pure logic, run the matching unit + property-based tests so regressions show up immediately.",
+      "trigger": "PostFileSave",
+      "matcher": "src/features/(rules|privacy|actions|export|classify|ask|notifications)/.*\\.(ts|tsx)$",
+      "action": { "type": "command", "command": "npx jest --findRelatedTests --passWithNoTests" },
+      "timeout": 120
+    }
+  ]
+}

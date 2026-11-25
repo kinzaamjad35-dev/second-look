@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Keep README and Kiro write-up in sync",
+      "description": "At the end of each agent turn, note what changed so the README and KIRO_USAGE log stay accurate for judges.",
+      "trigger": "Stop",
+      "action": {
+        "type": "agent",
+        "prompt": "If this turn added or changed a user-facing feature, update the Features section of README.md. Append one dated line to docs/KIRO_USAGE_LOG.md describing which Kiro feature was used (spec task, steering, hook, MCP, property test) and what it produced. Keep it short; skip if nothing user-facing changed."
+      }
+    }
+  ]
+}
