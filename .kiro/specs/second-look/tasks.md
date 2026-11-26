@@ -4,7 +4,7 @@ Ordered MVP-first: a runnable Expo Go app exists after tasks 1–3; the web Demo
 
 ## Phase 1 — Scaffold + runnable app
 
-- [ ] 1. **Scaffold Expo app.** `npx create-expo-app@latest` with Expo SDK 54, managed workflow, TypeScript strict, Expo Router, dark graveyard theme tokens (colors, tombstone icon). Verify it opens in Expo Go on iOS and Android.
+- [x] 1. **Scaffold Expo app.** `npx create-expo-app@latest` with Expo SDK 54, managed workflow, TypeScript strict, Expo Router, dark graveyard theme tokens (colors, tombstone icon). Verify it opens in Expo Go on iOS and Android.
 - [ ] 2. **Set up testing + structure.** Jest + jest-expo + fast-check; folder structure (app routes, features/{rules,privacy,classify,notifications,actions,export}, db, demo data); ESLint/Prettier. Add a smoke test that renders the home screen.
 - [ ] 3. **Static Library screen with demo data.** Grid of shot cards from a bundled ~10-shot JSON fixture; ShotCard with thumbnail, title/reason placeholder, status. Runnable Expo Go app at this point.
 

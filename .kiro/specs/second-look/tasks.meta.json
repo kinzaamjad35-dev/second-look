@@ -1,0 +1,17 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. **Scaffold Expo app.** `npx create-expo-app@latest` with Expo SDK 54, managed workflow, TypeScript strict, Expo Router, dark graveyard theme tokens (colors, tombstone icon). Verify it opens in Expo Go on iOS and Android.": [
+      {
+        "executionId": "3614ce57-84eb-43ff-b6dc-4432fdc0901b",
+        "chatSessionId": "sess_8b3400cd-6c95-49c5-828a-0cd09781785b",
+        "timestamp": 1795629037863
+      },
+      {
+        "executionId": "3614ce57-84eb-43ff-b6dc-4432fdc0901b",
+        "chatSessionId": "sess_8b3400cd-6c95-49c5-828a-0cd09781785b",
+        "timestamp": 1795633307935
+      }
+    ]
+  }
+}
