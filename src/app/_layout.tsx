@@ -17,7 +17,7 @@ export default function RootLayout() {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
-      <StatusBar style="light" backgroundColor={colors.background} />
+      <StatusBar style="light" />
       <Stack
         screenOptions={{
           headerStyle: { backgroundColor: colors.surface },
@@ -25,7 +25,13 @@ export default function RootLayout() {
           headerTitleStyle: { fontWeight: '700', color: colors.text },
           contentStyle: { backgroundColor: colors.background },
         }}
-      />
+      >
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="onboarding"
+          options={{ headerShown: false, animation: 'fade' }}
+        />
+      </Stack>
     </View>
   );
 }

@@ -8,15 +8,23 @@ interface ThemedTextProps {
   type?: TextType;
   style?: TextStyle | TextStyle[];
   children: React.ReactNode;
+  numberOfLines?: number;
+  ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
 }
 
 /**
  * Text component that uses the graveyard theme tokens.
  * Defaults to `body` variant.
  */
-export function ThemedText({ type = 'body', style, children }: ThemedTextProps) {
+export function ThemedText({ type = 'body', style, children, numberOfLines, ellipsizeMode }: ThemedTextProps) {
   return (
-    <Text style={[styles.base, styles[type], style as TextStyle]}>{children}</Text>
+    <Text
+      style={[styles.base, styles[type], style as TextStyle]}
+      numberOfLines={numberOfLines}
+      ellipsizeMode={ellipsizeMode}
+    >
+      {children}
+    </Text>
   );
 }
 

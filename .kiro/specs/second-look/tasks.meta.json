@@ -12,6 +12,47 @@
         "chatSessionId": "sess_8b3400cd-6c95-49c5-828a-0cd09781785b",
         "timestamp": 1795633307935
       }
+    ],
+    "2. **Set up testing + structure.** Jest + jest-expo + fast-check; folder structure (app routes, features/{rules,privacy,classify,notifications,actions,export}, db, demo data); ESLint/Prettier. Add a smoke test that renders the home screen.": [
+      {
+        "executionId": "484241a1-97e9-407f-a566-c39ba063eb72",
+        "chatSessionId": "sess_bde21f01-2266-4e34-b5bc-d200f9950eb2",
+        "timestamp": 1795685870012
+      },
+      {
+        "executionId": "484241a1-97e9-407f-a566-c39ba063eb72",
+        "chatSessionId": "sess_bde21f01-2266-4e34-b5bc-d200f9950eb2",
+        "timestamp": 1795688669749
+      }
+    ],
+    "3. **Static Library screen with demo data.** Grid of shot cards from a bundled ~10-shot JSON fixture; ShotCard with thumbnail, title/reason placeholder, status. Runnable Expo Go app at this point.": [
+      {
+        "executionId": "48025cbd-642f-415e-8b45-b114b4be573e",
+        "chatSessionId": "sess_5ae43e7d-6470-43e4-90be-cbee99e4b93c",
+        "timestamp": 1795689404733
+      },
+      {
+        "executionId": "48025cbd-642f-415e-8b45-b114b4be573e",
+        "chatSessionId": "sess_5ae43e7d-6470-43e4-90be-cbee99e4b93c",
+        "timestamp": 1795690657324
+      }
+    ],
+    "4. **Onboarding + photo permission flow** (FR-1): explainer screen, permission request, denied-state (settings button + \"Try demo\"), iOS Limited-Photos explanation. Unit-test the permission-state reducer.": [
+      {
+        "executionId": "d158698d-543e-4b1e-8551-f2d7a4e5004b",
+        "chatSessionId": "sess_996a87b9-3b64-48c9-944d-8f3b409caa43",
+        "timestamp": 1795695519461
+      },
+      {
+        "executionId": "901029d2-ee1d-4135-9fd1-ec8add0cdcf5",
+        "chatSessionId": "sess_a0930b5e-3f98-415a-908b-b155effb88ed",
+        "timestamp": 1795696295196
+      },
+      {
+        "executionId": "901029d2-ee1d-4135-9fd1-ec8add0cdcf5",
+        "chatSessionId": "sess_a0930b5e-3f98-415a-908b-b155effb88ed",
+        "timestamp": 1795697211360
+      }
     ]
   }
 }

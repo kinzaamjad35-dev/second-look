@@ -4,13 +4,13 @@ Ordered MVP-first: a runnable Expo Go app exists after tasks 1–3; the web Demo
 
 ## Phase 1 — Scaffold + runnable app
 
-- [x] 1. **Scaffold Expo app.** `npx create-expo-app@latest` with Expo SDK 54, managed workflow, TypeScript strict, Expo Router, dark graveyard theme tokens (colors, tombstone icon). Verify it opens in Expo Go on iOS and Android.
-- [ ] 2. **Set up testing + structure.** Jest + jest-expo + fast-check; folder structure (app routes, features/{rules,privacy,classify,notifications,actions,export}, db, demo data); ESLint/Prettier. Add a smoke test that renders the home screen.
-- [ ] 3. **Static Library screen with demo data.** Grid of shot cards from a bundled ~10-shot JSON fixture; ShotCard with thumbnail, title/reason placeholder, status. Runnable Expo Go app at this point.
+- [x] 1. **Scaffold Expo app.** `npx create-expo-app@latest` with Expo SDK 58, managed workflow, TypeScript strict, Expo Router, dark graveyard theme tokens (colors, tombstone icon). Verify it opens in Expo Go on iOS and Android.
+- [x] 2. **Set up testing + structure.** Jest + jest-expo + fast-check; folder structure (app routes, features/{rules,privacy,classify,notifications,actions,export}, db, demo data); ESLint/Prettier. Add a smoke test that renders the home screen.
+- [x] 3. **Static Library screen with demo data.** Grid of shot cards from a bundled ~10-shot JSON fixture; ShotCard with thumbnail, title/reason placeholder, status. Runnable Expo Go app at this point.
 
 ## Phase 2 — Permission, scan, local list
 
-- [ ] 4. **Onboarding + photo permission flow** (FR-1): explainer screen, permission request, denied-state (settings button + "Try demo"), iOS Limited-Photos explanation. Unit-test the permission-state reducer.
+- [x] 4. **Onboarding + photo permission flow** (FR-1): explainer screen, permission request, denied-state (settings button + "Try demo"), iOS Limited-Photos explanation. Unit-test the permission-state reducer.
 - [ ] 5. **Screenshot scan + auto-import** (FR-2): iOS Screenshots album / mediaSubtypes; Android album/filename match; incremental via `settings.lastScanAt`; re-scan on foreground return; ~300px thumbnail via expo-image-manipulator; asset-id upsert into SQLite.
 - [ ] 6. **dHash + duplicates** (FR-2.4, FR-3.2): tiny greyscale bitmap + jpeg-js → 64-bit dHash; Hamming ≤ 5 near-duplicate marking; pure module + property tests (self-duplicate, symmetric).
 - [ ] 7. **Import fallback + error states**: manual "pick screenshots" picker when album detection finds nothing; per-file error surfacing.
