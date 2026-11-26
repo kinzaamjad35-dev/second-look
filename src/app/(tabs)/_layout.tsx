@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Tabs } from 'expo-router';
+import { Redirect, Tabs } from 'expo-router';
 
+import { useGate } from '@/src/features/privacy/useGate';
 import { colors, labels } from '@/src/theme/tokens';
 
 type IoniconsName = keyof typeof Ionicons.glyphMap;
@@ -11,16 +12,16 @@ interface TabIconProps {
 }
 
 function TabIcon({ name, focused }: TabIconProps) {
-  return (
-    <Ionicons
-      name={name}
-      size={24}
-      color={focused ? colors.accent : colors.textMuted}
-    />
-  );
+  return <Ionicons name={name} size={24} color={focused ? colors.accent : colors.textMuted} />;
 }
 
 export default function TabLayout() {
+  const gate = useGate();
+  // Wait under the splash screen until the start route is known.
+  if (gate.status === 'loading') return null;
+  // First launch / no photo permission and no Demo mode → onboarding (FR-1.1).
+  if (gate.route === 'onboarding') return <Redirect href="/onboarding" />;
+
   return (
     <Tabs
       screenOptions={{
@@ -68,7 +69,10 @@ export default function TabLayout() {
         options={{
           title: labels.ask,
           tabBarIcon: ({ focused }) => (
-            <TabIcon name={focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline'} focused={focused} />
+            <TabIcon
+              name={focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline'}
+              focused={focused}
+            />
           ),
         }}
       />

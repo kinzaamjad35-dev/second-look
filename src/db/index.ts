@@ -1,6 +1,17 @@
 /**
- * SQLite database layer (expo-sqlite).
- * Schema: shots table, shots_fts virtual table, settings singleton.
- * See design.md §2 for the full schema.
+ * Database layer barrel export.
+ * Import from here rather than from individual files.
  */
-export {};
+export { initDb, getDb } from './schema';
+export { getSettings, updateLastScanAt, updateSettings } from './settings';
+export type { Settings } from './settings';
+export {
+  upsertShot,
+  getAllShots,
+  getShotsByStatus,
+  getShotById,
+  updateShotStatus,
+  shotExistsByAssetId,
+  deleteShotById,
+  deleteAllShots,
+} from './shots';

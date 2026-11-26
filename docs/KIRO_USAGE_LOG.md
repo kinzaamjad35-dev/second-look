@@ -1,3 +1,4 @@
 # Kiro Usage Log
 
 - 2026-06-30 — Spec-driven task execution (tasks.md, Task 4): onboarding + photo permission flow with a pure permission-state reducer, 36 unit tests; README Features section updated.
+- 2026-11-26 — Task 5 (screenshot scan + auto-import) was implemented outside Kiro, honestly noted: Kiro started it (schema/settings/shots repositories and a first mediaLibrary.ts), then the Kiro free monthly credits ran out and retries were refused. The rest was written by a general-purpose AI assistant (Grok Bot) working in the terminal, reviewing and finishing Kiro's files rather than rewriting them: SDK 58 media-library legacy API fix, paged incremental scan, ~300px thumbnails, SQLite upsert by asset id, foreground re-scan, wiring onboarding at app start, and unit tests. Hackathon Kiro credits have been requested; Kiro resumes from task 6.

@@ -11,7 +11,7 @@ Ordered MVP-first: a runnable Expo Go app exists after tasks 1–3; the web Demo
 ## Phase 2 — Permission, scan, local list
 
 - [x] 4. **Onboarding + photo permission flow** (FR-1): explainer screen, permission request, denied-state (settings button + "Try demo"), iOS Limited-Photos explanation. Unit-test the permission-state reducer.
-- [ ] 5. **Screenshot scan + auto-import** (FR-2): iOS Screenshots album / mediaSubtypes; Android album/filename match; incremental via `settings.lastScanAt`; re-scan on foreground return; ~300px thumbnail via expo-image-manipulator; asset-id upsert into SQLite.
+- [x] 5. **Screenshot scan + auto-import** (FR-2): iOS Screenshots album / mediaSubtypes; Android album/filename match; incremental via `settings.lastScanAt`; re-scan on foreground return; ~300px thumbnail via expo-image-manipulator; asset-id upsert into SQLite.
 - [ ] 6. **dHash + duplicates** (FR-2.4, FR-3.2): tiny greyscale bitmap + jpeg-js → 64-bit dHash; Hamming ≤ 5 near-duplicate marking; pure module + property tests (self-duplicate, symmetric).
 - [ ] 7. **Import fallback + error states**: manual "pick screenshots" picker when album detection finds nothing; per-file error surfacing.
 - [ ] 8. **Library screen reads real SQLite data** with thumbnails, grouping by category, pull-to-refresh, empty state.

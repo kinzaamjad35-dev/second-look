@@ -53,6 +53,13 @@
         "chatSessionId": "sess_a0930b5e-3f98-415a-908b-b155effb88ed",
         "timestamp": 1795697211360
       }
+    ],
+    "5. **Screenshot scan + auto-import** (FR-2): iOS Screenshots album / mediaSubtypes; Android album/filename match; incremental via `settings.lastScanAt`; re-scan on foreground return; ~300px thumbnail via expo-image-manipulator; asset-id upsert into SQLite.": [
+      {
+        "executionId": "e72b59f9-c021-431e-b950-67fb20ac504b",
+        "chatSessionId": "sess_abe32308-e837-441d-a1d7-ab7f5054002b",
+        "timestamp": 1795697533548
+      }
     ]
   }
 }

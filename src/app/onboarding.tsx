@@ -11,7 +11,7 @@
  */
 import * as Linking from 'expo-linking';
 import { useRouter } from 'expo-router';
-import { useCallback, useEffect, useReducer } from 'react';
+import { useCallback, useEffect, useReducer, useRef } from 'react';
 import { ActivityIndicator, Platform, Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -19,6 +19,9 @@ import { DeniedPermissionGate, LimitedPermissionGate } from '@/src/components/Pe
 import { ThemedText } from '@/src/components/ThemedText';
 import { Tombstone } from '@/src/components/Tombstone';
 import { startScan } from '@/src/features/import';
+import { hasScreenshotAlbum } from '@/src/features/import/mediaLibrary';
+import { completeOnboarding } from '@/src/features/privacy/bootstrap';
+import { useGate } from '@/src/features/privacy/useGate';
 import {
   INITIAL_PERMISSION_STATE,
   permissionReducer,
@@ -32,22 +35,54 @@ export default function OnboardingScreen() {
   const [state, dispatch] = useReducer(permissionReducer, INITIAL_PERMISSION_STATE);
   const view = permissionView(state);
 
-  // ── Grant → navigate + kick off scan ──────────────────────────────
+  const gate = useGate();
+  const gateRouteAtMount = useRef(gate.route);
+
+  // ── Grant → persist choice, kick off scan, go to Library ───────────
   useEffect(() => {
     if (view !== 'scan') return;
-    // Task 5 fills in the real pipeline; for now it's a safe no-op.
-    const cancel = startScan();
+    // The scan keeps running after this screen unmounts (no cancel on cleanup).
+    startScan();
+    void completeOnboarding('library');
     router.replace('/(tabs)');
-    return cancel;
   }, [view, router]);
 
-  // ── Demo → navigate ────────────────────────────────────────────────
+  // ── Limited Photos: continue if the Screenshots album is reachable,
+  //    otherwise show the "no album" explanation (FR-1.4) ─────────────
+  useEffect(() => {
+    if (view !== 'limited-explanation' || Platform.OS === 'web') return;
+    let active = true;
+    hasScreenshotAlbum()
+      .catch(() => false)
+      .then((available) => {
+        if (!active) return;
+        dispatch({ type: 'ALBUM_CHECK', screenshotsAlbumAvailable: available });
+        if (available) {
+          startScan();
+          void completeOnboarding('library');
+          router.replace('/(tabs)');
+        }
+      });
+    return () => {
+      active = false;
+    };
+  }, [view, router]);
+
+  // ── Demo → persist choice, navigate ───────────────────────────────
   useEffect(() => {
     if (view !== 'demo') return;
-    // Pass demo=1 so the Library tab knows to stay in demo mode.
-    // Task 23 wires full demo data; for now the tab already shows demo shots.
+    void completeOnboarding('demo');
     router.replace({ pathname: '/(tabs)', params: { demo: '1' } });
   }, [view, router]);
+
+  // ── Returned from Settings with access granted (foreground re-check
+  //    flips the gate to 'library') → leave onboarding ───────────────
+  useEffect(() => {
+    if (gate.status !== 'ready' || gate.route !== 'library') return;
+    if (gateRouteAtMount.current === 'library') return;
+    if (view === 'scan' || view === 'limited-explanation') return; // handled above
+    router.replace('/(tabs)');
+  }, [gate.status, gate.route, view, router]);
 
   // ── Handlers ───────────────────────────────────────────────────────
   const handleGrantPress = useCallback(async () => {
@@ -77,12 +112,7 @@ export default function OnboardingScreen() {
 
   // ── Render ─────────────────────────────────────────────────────────
   if (view === 'denied') {
-    return (
-      <DeniedPermissionGate
-        onOpenSettings={handleOpenSettings}
-        onTryDemo={handleTryDemo}
-      />
-    );
+    return <DeniedPermissionGate onOpenSettings={handleOpenSettings} onTryDemo={handleTryDemo} />;
   }
 
   if (view === 'limited-explanation') {
@@ -169,8 +199,7 @@ export default function OnboardingScreen() {
           </Pressable>
 
           <ThemedText type="caption" style={styles.permNote}>
-            Photo access is used only to find your screenshots. Originals stay in your camera
-            roll.
+            Photo access is used only to find your screenshots. Originals stay in your camera roll.
           </ThemedText>
         </View>
       </SafeAreaView>
@@ -180,15 +209,7 @@ export default function OnboardingScreen() {
 
 // ─── Explainer item ────────────────────────────────────────────────────────────
 
-function ExplainerItem({
-  emoji,
-  heading,
-  body,
-}: {
-  emoji: string;
-  heading: string;
-  body: string;
-}) {
+function ExplainerItem({ emoji, heading, body }: { emoji: string; heading: string; body: string }) {
   return (
     <View style={styles.explainerItem}>
       <ThemedText type="body" style={styles.explainerEmoji}>
